@@ -13,7 +13,6 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react()],
 
-      base: '/oussamaelhadi.github.io/', // 🔴 REQUIRED FOR GITHUB PAGES
 
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
