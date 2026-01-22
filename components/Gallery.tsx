@@ -22,9 +22,9 @@ const Gallery: React.FC<GalleryProps> = ({ vehicle }) => {
           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
 
-        {/* Miniature Vidéo Flottante (Style Temu) */}
+        {/* Miniature Vidéo Flottante */}
         <div className="absolute bottom-6 right-6 w-28 h-40 rounded-2xl overflow-hidden border-2 border-white shadow-2xl z-20 group-hover:scale-110 transition-transform cursor-pointer">
-          <img src={vehicle.images[1]} className="w-full h-full object-cover opacity-90" alt="Video preview" />
+          <img src={vehicle.images[1]} className="w-full h-full object-cover opacity-90" alt="Aperçu vidéo" />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
              <div className="w-10 h-10 bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center">
                <Play size={18} className="text-white fill-white ml-0.5" />
@@ -32,7 +32,7 @@ const Gallery: React.FC<GalleryProps> = ({ vehicle }) => {
           </div>
           <div className="absolute top-2 right-2 flex gap-1">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            <span className="text-[8px] font-black text-white uppercase tracking-widest drop-shadow-md">LIVE VIEW</span>
+            <span className="text-[8px] font-black text-white uppercase tracking-widest drop-shadow-md">VUE EN DIRECT</span>
           </div>
         </div>
         
@@ -71,7 +71,7 @@ const Gallery: React.FC<GalleryProps> = ({ vehicle }) => {
               activeIdx === idx ? 'border-[#1459DD] shadow-lg ring-4 ring-blue-50' : 'border-transparent opacity-60 hover:opacity-100'
             }`}
           >
-            <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+            <img src={img} alt="Miniature" className="w-full h-full object-cover" />
           </button>
         ))}
       </div>
