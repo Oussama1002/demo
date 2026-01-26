@@ -2,6 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, ChevronRight, Play, BadgeCheck, Timer, Zap, Quote, Gavel, CarFront, X, ArrowRight, ExternalLink, Fuel, Gauge, Calendar, Settings2, Wallet, Landmark, Radio, TrendingUp, Banknote, Star, MapPin, ChevronLeft, Bell, Users, PlusCircle, Info, Video, ShieldCheck, Sparkles, HandCoins, Tags, Filter, BookOpen, Clock, ArrowUpRight, BarChart3 } from 'lucide-react';
 import { MOCK_VEHICLE } from '../constants';
+const formatPrice = (value: number) =>
+  new Intl.NumberFormat('fr-FR')
+    .format(value)
+    .replace(/\u202F/g, ' ');
+
 
 interface HomeProps {
   onVehicleClick: () => void;
@@ -183,7 +188,7 @@ const Home: React.FC<HomeProps> = ({ onVehicleClick, onSeeMoreClick, onEstimatio
         </div>
 
         <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md text-slate-900 px-5 py-4 rounded-2xl shadow-2xl flex flex-col border border-slate-100">
-          <span className="text-2xl font-black tracking-tighter leading-none text-[#1459DD]">{vehicle.price.toLocaleString()} MAD</span>
+          <span className="text-2xl font-black tracking-tighter leading-none text-[#1459DD]">{formatPrice(vehicle.price)} MAD</span>
         </div>
       </div>
 
@@ -196,7 +201,7 @@ const Home: React.FC<HomeProps> = ({ onVehicleClick, onSeeMoreClick, onEstimatio
           </div>
           <div className="flex items-center gap-3 text-slate-400">
             <Gauge size={16} className="text-[#1459DD]" />
-            <span className="text-xs font-bold uppercase tracking-tight text-slate-600">{vehicle.mileage.toLocaleString()} km</span>
+            <span className="text-xs font-bold uppercase tracking-tight text-slate-600">{formatPrice(vehicle.mileage)} km</span>
           </div>
           <div className="flex items-center gap-3 text-slate-400">
             <Settings2 size={16} className="text-[#1459DD]" />
@@ -211,7 +216,7 @@ const Home: React.FC<HomeProps> = ({ onVehicleClick, onSeeMoreClick, onEstimatio
           <div className="flex flex-col">
             <span className="text-[9px] font-black text-white/70 uppercase tracking-widest mb-1">VOTRE MENSUALITÉ À PARTIR DE</span>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-black text-white">{Math.round(vehicle.price / 84).toLocaleString()}</span>
+              <span className="text-2xl font-black text-white">{formatPrice(Math.round(vehicle.price / 84))}</span>
               <span className="text-xs font-black text-[#FDD817]">MAD / MOIS</span>
             </div>
           </div>
@@ -298,70 +303,95 @@ const Home: React.FC<HomeProps> = ({ onVehicleClick, onSeeMoreClick, onEstimatio
       </section>
 
       {/* 3. MOTEUR DE RECHERCHE (NEW COMPACT DESIGN) */}
-      <section className="px-4 py-12 bg-white relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-full opacity-[0.03] pointer-events-none" style={{backgroundImage: 'radial-gradient(#1459DD 1px, transparent 1px)', backgroundSize: '32px 32px'}}></div>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="bg-white rounded-2xl md:rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-2 md:p-3 border border-slate-100 flex flex-col md:flex-row items-stretch md:items-center gap-2 group transition-all hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)]">
-            
-            {/* Zone Marque */}
-            <div className="flex-1 flex items-center gap-4 px-6 py-3 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl md:rounded-l-full group/item">
-              <CarFront size={18} className="text-[#1459DD]" />
-              <div className="flex-1 text-left">
-                <label className="block text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1 group-hover/item:text-[#1459DD] transition-colors">Marque</label>
-                <select className="w-full bg-transparent border-none text-sm font-black text-slate-900 outline-none cursor-pointer appearance-none">
-                  <option>Toutes marques</option>
-                  <option>Porsche</option>
-                  <option>BMW</option>
-                  <option>Mercedes</option>
-                </select>
-              </div>
-              <div className="hidden md:block w-px h-8 bg-slate-100 ml-4"></div>
-            </div>
+<section className="px-4 py-12 bg-white relative overflow-hidden">
+  {/* Background pattern */}
+  <div
+    className="absolute top-0 inset-x-0 h-full opacity-[0.03] pointer-events-none"
+    style={{
+      backgroundImage: "radial-gradient(#1459DD 1px, transparent 1px)",
+      backgroundSize: "32px 32px",
+    }}
+  />
 
-            {/* Zone Modèle */}
-            <div className="flex-1 flex items-center gap-4 px-6 py-3 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl group/item">
-              <Settings2 size={18} className="text-[#1459DD]" />
-              <div className="flex-1 text-left">
-                <label className="block text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1 group-hover/item:text-[#1459DD] transition-colors">Modèle</label>
-                <select className="w-full bg-transparent border-none text-sm font-black text-slate-900 outline-none cursor-pointer appearance-none">
-                  <option>Tous modèles</option>
-                  <option>911 Carrera</option>
-                  <option>Cayenne</option>
-                </select>
-              </div>
-              <div className="hidden md:block w-px h-8 bg-slate-100 ml-4"></div>
-            </div>
+  <div className="max-w-5xl mx-auto relative z-10">
+    <div className="bg-white rounded-2xl md:rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-2 md:p-3 border border-slate-100 flex flex-col md:flex-row items-stretch md:items-center gap-2 group transition-all hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)]">
 
-            {/* Zone Budget */}
-            <div className="flex-1 flex items-center gap-4 px-6 py-3 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl group/item">
-              <Tags size={18} className="text-[#1459DD]" />
-              <div className="flex-1 text-left">
-                <label className="block text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1 group-hover/item:text-[#1459DD] transition-colors">Budget Max</label>
-                <select className="w-full bg-transparent border-none text-sm font-black text-slate-900 outline-none cursor-pointer appearance-none">
-                  <option>Indifférent</option>
-                  <option>+ 500 000 MAD</option>
-                  <option>+ 1 000 000 MAD</option>
-                </select>
-              </div>
-            </div>
+      {/* Marque */}
+      <div className="flex-1 flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl md:rounded-l-full group/item">
+        <CarFront size={18} className="text-[#1459DD]" />
 
-            {/* Bouton CTA */}
-            <button className="md:ml-2 bg-[#1459DD] text-white px-8 md:px-10 py-4 md:py-4 rounded-xl md:rounded-full flex items-center justify-center gap-3 font-black text-xs uppercase tracking-widest shadow-lg hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all">
-              <Search size={18} strokeWidth={3} />
-              <span>Trouver</span>
-            </button>
-          </div>
+        <div className="flex-1 text-left">
+          <label className="block text-sm font-extrabold text-slate-900 leading-tight">
+            Marque
+          </label>
+          <select className="w-full bg-transparent border-none text-xs font-semibold text-slate-400 outline-none cursor-pointer appearance-none group-hover/item:text-slate-600 transition-colors">
+            <option>Toutes les marques</option>
+            <option>Porsche</option>
+            <option>BMW</option>
+            <option>Mercedes</option>
+          </select>
         </div>
 
-        {/* Logos Marques */}
-        <div className="overflow-hidden py-10 mt-6 border-t border-slate-50">
-          <div className="flex gap-20 whitespace-nowrap animate-infinite-scroll">
-            {[...brands, ...brands].map((b, i) => (
-              <img key={i} src={b.logo} alt={b.name} className="h-8 grayscale opacity-20 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer" />
-            ))}
-          </div>
+        <div className="hidden md:block w-px h-8 bg-slate-100 ml-4" />
+      </div>
+
+      {/* Modèle */}
+      <div className="flex-1 flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl group/item">
+        <Settings2 size={18} className="text-[#1459DD]" />
+
+        <div className="flex-1 text-left">
+          <label className="block text-sm font-extrabold text-slate-900 leading-tight">
+            Modèle
+          </label>
+          <select className="w-full bg-transparent border-none text-xs font-semibold text-slate-400 outline-none cursor-pointer appearance-none group-hover/item:text-slate-600 transition-colors">
+            <option>Tous les modèles</option>
+            <option>911 Carrera</option>
+            <option>Cayenne</option>
+          </select>
         </div>
-      </section>
+
+        <div className="hidden md:block w-px h-8 bg-slate-100 ml-4" />
+      </div>
+
+      {/* Budget */}
+      <div className="flex-1 flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors cursor-pointer rounded-xl group/item">
+        <Tags size={18} className="text-[#1459DD]" />
+
+        <div className="flex-1 text-left">
+          <label className="block text-sm font-extrabold text-slate-900 leading-tight">
+            Budget max
+          </label>
+          <select className="w-full bg-transparent border-none text-xs font-semibold text-slate-400 outline-none cursor-pointer appearance-none group-hover/item:text-slate-600 transition-colors">
+            <option>Indifférent</option>
+            <option>+ 500 000 MAD</option>
+            <option>+ 1 000 000 MAD</option>
+          </select>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <button className="md:ml-2 bg-[#1459DD] text-white px-8 md:px-10 py-4 rounded-xl md:rounded-full flex items-center justify-center gap-3 font-black text-xs uppercase tracking-widest shadow-lg hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all">
+        <Search size={18} strokeWidth={3} />
+        <span>Trouver</span>
+      </button>
+    </div>
+  </div>
+
+  {/* Logos */}
+  <div className="overflow-hidden py-10 mt-6 border-t border-slate-50">
+    <div className="flex gap-20 whitespace-nowrap animate-infinite-scroll">
+      {[...brands, ...brands].map((b, i) => (
+        <img
+          key={i}
+          src={b.logo}
+          alt={b.name}
+className="h-8 opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* 4. ANNONCES CERTIFIÉES */}
       <section className="py-24 bg-slate-50">
@@ -507,14 +537,14 @@ const Home: React.FC<HomeProps> = ({ onVehicleClick, onSeeMoreClick, onEstimatio
                   BESOIN D'UN <br />
                   <span className="text-[#FDD817]">EXPERT <br />NADO ?</span>
                 </h2>
-                <a 
-                  href="https://wa.me/212520070611" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 px-10 py-6 bg-white text-[#1459DD] rounded-3xl font-black text-sm uppercase shadow-2xl hover:scale-105 transition-transform"
-                >
-                  <ExternalLink size={24} strokeWidth={3} /> CHATTER SUR WHATSAPP
-                </a>
+              <a 
+  href="/contact"
+  className="inline-flex items-center gap-4 px-10 py-6 bg-white text-[#1459DD] rounded-3xl font-black text-sm uppercase shadow-2xl hover:scale-105 transition-transform"
+>
+  <ExternalLink size={24} strokeWidth={3} />
+  FORMULAIRE DE CONTACT
+</a>
+
               </div>
               <div className="flex-1 relative">
                 <div className="bg-white/10 backdrop-blur-xl p-4 rounded-[4rem] border border-white/20 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)]">
